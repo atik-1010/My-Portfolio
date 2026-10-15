@@ -8,7 +8,13 @@ import { Badge } from '@/components/ui/Badge';
 import { formatMonthYear } from '@/lib/utils';
 import type { Repository } from '@/data/types';
 
-/** Rough language → dot colour, matching GitHub's own convention. */
+/**
+ * Rough language → dot colour, matching GitHub's own convention.
+ *
+ * Fixed palette shades on purpose, not theme tokens: these are identity
+ * colours people recognise per language, so they stay put in both themes.
+ * They are decorative — every dot sits beside its language name in text.
+ */
 const languageColor: Record<string, string> = {
   'C#': 'bg-violet-400',
   'C++': 'bg-blue-400',
@@ -61,7 +67,7 @@ export async function GitHubActivity() {
       <Reveal>
         <div className="card mb-5 flex flex-col gap-6 p-7 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-ink">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface-muted text-ink">
               <Github className="h-5 w-5" aria-hidden="true" />
             </span>
             <div>
@@ -82,7 +88,7 @@ export async function GitHubActivity() {
           <div className="flex items-center gap-3">
             {isLive ? (
               <span className="inline-flex items-center gap-1.5 text-[11px] text-ink-faint">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                <span className="h-1.5 w-1.5 rounded-full bg-tone-success" aria-hidden="true" />
                 Live
               </span>
             ) : null}

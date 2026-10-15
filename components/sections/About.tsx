@@ -27,7 +27,7 @@ export function About() {
                   aria-hidden="true"
                 />
                 <div className="relative flex items-center justify-between">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent-blue">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface-muted text-accent-blue">
                     <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
                   </span>
                   <span className="font-mono text-xs tracking-widest text-ink-faint">
@@ -48,7 +48,7 @@ export function About() {
           <article className="card p-7 sm:p-8">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex gap-4">
-                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent-violet">
+                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-surface-muted text-accent-violet">
                   <GraduationCap className="h-[18px] w-[18px]" aria-hidden="true" />
                 </span>
                 <div>

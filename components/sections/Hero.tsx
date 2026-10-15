@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, Download, MapPin } from 'lucide-react';
 import { profile } from '@/data/profile';
-import { competitive } from '@/data/competitive';
 import { ButtonLink } from '@/components/ui/Button';
 import { getSocialIcon } from '@/components/ui/Icon';
 
@@ -45,7 +44,7 @@ export function Hero() {
     >
       {/* Ambient background — one soft accent wash and a faint grid. */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute left-1/2 top-[-18rem] h-[36rem] w-[min(72rem,140vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.16),rgba(139,92,246,0.08),transparent)] blur-2xl" />
+        <div className="absolute left-1/2 top-[-18rem] h-[36rem] w-[min(72rem,140vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(var(--accent-blue)/0.16),rgb(var(--accent-violet)/0.08),transparent)] blur-2xl" />
         <div className="absolute inset-x-0 top-0 h-[42rem] bg-grid-faint [background-size:64px_64px] [mask-image:radial-gradient(70%_50%_at_50%_0%,black,transparent)]" />
       </div>
 
@@ -61,8 +60,8 @@ export function Hero() {
             <motion.div variants={item}>
               <span className="inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/60 px-3.5 py-1.5 text-xs text-ink-muted backdrop-blur-sm">
                 <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
-                  <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-emerald-400" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-tone-success" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-tone-success" />
                 </span>
                 {profile.availability}
               </span>
@@ -139,7 +138,7 @@ export function Hero() {
           <motion.div variants={item} className="relative mx-auto w-full max-w-sm lg:max-w-none">
             <div className="relative">
               <div
-                className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(59,130,246,0.22),transparent)] blur-xl"
+                className="absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgb(var(--accent-blue)/0.22),transparent)] blur-xl"
                 aria-hidden="true"
               />
               <div className="edge-light relative aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-surface shadow-card">
@@ -161,21 +160,21 @@ export function Hero() {
                       aria-hidden="true"
                     />
                     <div
-                      className="absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_0%,rgba(59,130,246,0.18),transparent_60%)]"
+                      className="absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--accent-blue)/0.18),transparent_60%)]"
                       aria-hidden="true"
                     />
-                    <span className="relative font-mono text-7xl font-semibold tracking-tighter text-white/15">
+                    <span className="relative font-mono text-7xl font-semibold tracking-tighter text-ink/15">
                       AR
                     </span>
                   </div>
                 )}
 
                 <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-base/85 via-transparent to-transparent"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-canvas/85 via-transparent to-transparent"
                   aria-hidden="true"
                 />
 
-                <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-line bg-base/70 p-4 backdrop-blur-md">
+                <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-line bg-canvas/70 p-4 backdrop-blur-md">
                   <p className="text-sm font-medium text-ink">{profile.education.shortName}</p>
                   <p className="mt-0.5 text-xs leading-relaxed text-ink-muted">
                     B.Sc. in {profile.education.field}

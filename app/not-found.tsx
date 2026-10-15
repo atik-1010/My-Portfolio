@@ -13,7 +13,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="group mt-9 inline-flex h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-medium text-black transition-colors hover:bg-white/90"
+          className="group mt-9 inline-flex h-11 items-center gap-2 rounded-full bg-cta px-5 text-sm font-medium text-cta-fg transition-colors hover:bg-cta/90"
         >
           <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
           Back to portfolio

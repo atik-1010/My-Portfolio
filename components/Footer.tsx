@@ -7,7 +7,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-base-soft no-print">
+    <footer className="border-t border-line bg-canvas-soft no-print">
       <div className="shell py-14">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-sm">
@@ -52,7 +52,7 @@ export function Footer() {
                       {...(isExternal
                         ? { target: '_blank', rel: 'noopener noreferrer' }
                         : {})}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/[0.02] text-ink-muted transition-colors duration-200 hover:border-line-strong hover:text-ink"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface-subtle text-ink-muted transition-colors duration-200 hover:border-line-strong hover:text-ink"
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </a>

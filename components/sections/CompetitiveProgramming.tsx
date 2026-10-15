@@ -63,11 +63,11 @@ function leetcodeTier(rating: number | null, topPercentage: number | null): stri
 function leetcodeTierColor(tier: string): string {
   switch (tier.toLowerCase()) {
     case 'guardian':
-      return 'text-amber-300 border-amber-300/30';
+      return 'text-tone-warning border-tone-warning/30';
     case 'knight':
-      return 'text-violet-300 border-violet-300/30';
+      return 'text-tone-special border-tone-special/30';
     case 'coder':
-      return 'text-sky-300 border-sky-300/30';
+      return 'text-tone-info border-tone-info/30';
     default:
       return 'text-ink-faint border-line';
   }
@@ -146,7 +146,7 @@ function ProfileStrip({
   return (
     <div className="card flex flex-col gap-5 p-7 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-4">
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent-violet">
+        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface-muted text-accent-violet">
           <Icon className="h-5 w-5" aria-hidden />
         </span>
         <div>
@@ -157,7 +157,7 @@ function ProfileStrip({
             </Badge>
             {liveLabel ? (
               <span className="inline-flex items-center gap-1.5 text-[11px] text-ink-faint">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                <span className="h-1.5 w-1.5 rounded-full bg-tone-success" aria-hidden="true" />
                 {liveLabel}
               </span>
             ) : null}
@@ -224,7 +224,7 @@ export async function CompetitiveProgramming() {
           <StaggerItem key={stat.id}>
             <article className="card edge-light relative h-full overflow-hidden p-7">
               <div
-                className="pointer-events-none absolute inset-x-0 -top-24 h-40 bg-[radial-gradient(closest-side,rgba(59,130,246,0.14),transparent)]"
+                className="pointer-events-none absolute inset-x-0 -top-24 h-40 bg-[radial-gradient(closest-side,rgb(var(--accent-blue)/0.14),transparent)]"
                 aria-hidden="true"
               />
               <p className="relative font-mono text-4xl font-semibold tracking-tight text-ink sm:text-5xl">

@@ -2,10 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   Theme tokens
+   ---------------------------------------------------------------------------
+   Dark is the default on :root, so a visitor with JavaScript disabled gets the
+   site exactly as it has always looked. `.light` on <html> swaps the palette;
+   app/theme-script.ts sets that class before first paint, so there is no flash.
+
+   Colours are stored as space-separated RGB channels, not hex, because
+   tailwind.config.ts wraps them in `rgb(... / <alpha-value>)` to keep opacity
+   modifiers (`bg-canvas/80`) working.
+
+   Contrast ratios in the comments are against that palette's own canvas and
+   were measured, not estimated; keep them above 4.5:1 for body text.
+   --------------------------------------------------------------------------- */
 @layer base {
   :root {
     color-scheme: dark;
     --nav-height: 4rem;
+
+    --canvas: 5 5 5;
+    --canvas-soft: 8 8 8;
+
+    --surface: 13 13 13;
+    --surface-raised: 18 18 18;
+    --surface-hover: 22 22 22;
+
+    /* Faint washes layered over a surface: icon chips, inputs, inset panels. */
+    --wash: 255 255 255;
+    --wash-subtle: 0.02;
+    --wash-muted: 0.035;
+    --wash-strong: 0.07;
+
+    --line: 255 255 255;
+    --line-alpha: 0.08;
+    --line-strong-alpha: 0.14;
+
+    --ink: 255 255 255; /* 20.4:1 */
+    --ink-muted: 161 161 170; /* 7.9:1 */
+    --ink-faint: 139 139 147; /* 6.0:1 */
+
+    --accent-blue: 59 130 246; /* 5.5:1 */
+    --accent-violet: 139 92 246; /* 4.8:1 */
+    --accent-soft-alpha: 0.12;
+
+    /* Signal colours: availability dots, feature ticks, caveats, rank tiers. */
+    --tone-success: 52 211 153; /* 10.1:1 */
+    --tone-warning: 251 191 36; /* 11.6:1 */
+    --tone-info: 125 211 252; /* 11.7:1 */
+    --tone-special: 196 181 253; /* 10.5:1 */
+
+    /* Highest-emphasis filled control. */
+    --cta: 255 255 255;
+    --cta-fg: 5 5 5;
+
+    --grid-line: rgb(255 255 255 / 0.045);
+    --edge-light: rgb(255 255 255 / 0.2);
+
+    --shadow-card: inset 0 1px 0 0 rgb(255 255 255 / 0.04),
+      0 20px 40px -24px rgb(0 0 0 / 0.9);
+    --shadow-glow: 0 0 80px -20px rgb(59 130 246 / 0.45);
+    --shadow-cta: 0 10px 30px -12px rgb(255 255 255 / 0.45);
+    --shadow-cta-hover: 0 14px 36px -12px rgb(255 255 255 / 0.6);
+
+    --scrollbar-track: #050505;
+    --scrollbar-thumb: rgb(255 255 255 / 0.12);
+    --scrollbar-thumb-hover: rgb(255 255 255 / 0.2);
+  }
+
+  :root.light {
+    color-scheme: light;
+
+    /* Canvas sits a shade below the cards, so white surfaces read as raised —
+       the same depth cue as dark mode, inverted. */
+    --canvas: 248 250 252;
+    --canvas-soft: 241 245 249;
+
+    --surface: 255 255 255;
+    --surface-raised: 255 255 255;
+    --surface-hover: 248 250 252;
+
+    --wash: 15 23 42;
+    --wash-subtle: 0.025;
+    --wash-muted: 0.045;
+    --wash-strong: 0.08;
+
+    --line: 15 23 42;
+    --line-alpha: 0.11;
+    --line-strong-alpha: 0.18;
+
+    --ink: 15 23 42; /* 17.1:1 */
+    --ink-muted: 71 85 105; /* 7.2:1 */
+    --ink-faint: 90 105 128; /* 5.3:1 */
+
+    /* Darkened from the dark-mode accents: #3B82F6 measures only 3.1:1 on this
+       canvas and fails AA, #2563EB clears it. */
+    --accent-blue: 37 99 235; /* 4.9:1 */
+    --accent-violet: 109 40 217; /* 6.8:1 */
+    --accent-soft-alpha: 0.1;
+
+    /* The 400-level signal colours are unreadable on white — emerald-400
+       measures 1.8:1 — so light mode drops to the 700s, which clear AA as
+       text and not just as icons. */
+    --tone-success: 4 120 87; /* 5.2:1 */
+    --tone-warning: 180 83 9; /* 4.8:1 */
+    --tone-info: 3 105 161; /* 5.7:1 */
+    --tone-special: 109 40 217; /* 6.8:1 */
+
+    --cta: 15 23 42;
+    --cta-fg: 255 255 255;
+
+    --grid-line: rgb(15 23 42 / 0.055);
+    /* A white top-edge highlight is invisible on a white card, so light mode
+       uses a faint dark hairline for the same "lit from above" read. */
+    --edge-light: rgb(15 23 42 / 0.08);
+
+    --shadow-card: 0 1px 2px -1px rgb(15 23 42 / 0.08),
+      0 12px 28px -14px rgb(15 23 42 / 0.14);
+    --shadow-glow: 0 0 80px -20px rgb(37 99 235 / 0.25);
+    --shadow-cta: 0 10px 30px -12px rgb(15 23 42 / 0.4);
+    --shadow-cta-hover: 0 14px 36px -12px rgb(15 23 42 / 0.52);
+
+    --scrollbar-track: #f1f5f9;
+    --scrollbar-thumb: rgb(15 23 42 / 0.18);
+    --scrollbar-thumb-hover: rgb(15 23 42 / 0.28);
   }
 
   * {
@@ -20,7 +140,7 @@
   }
 
   body {
-    @apply bg-base text-ink antialiased;
+    @apply bg-canvas text-ink antialiased;
     font-feature-settings: 'ss01', 'cv01';
     text-rendering: optimizeLegibility;
   }
@@ -31,11 +151,11 @@
   }
 
   ::selection {
-    @apply bg-accent-blue/30 text-white;
+    @apply bg-accent-blue/30 text-ink;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-accent-blue/70 ring-offset-2 ring-offset-base rounded-sm;
+    @apply outline-none ring-2 ring-accent-blue/70 ring-offset-2 ring-offset-canvas rounded-sm;
   }
 
   h1,
@@ -75,8 +195,8 @@
   /* Subtle top-lit edge used on hero and section headers. */
   .edge-light::before {
     content: '';
-    @apply pointer-events-none absolute inset-x-0 top-0 h-px
-           bg-gradient-to-r from-transparent via-white/20 to-transparent;
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px;
+    background-image: linear-gradient(to right, transparent, var(--edge-light), transparent);
   }
 }
 
@@ -93,23 +213,46 @@
     -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
     mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
   }
+
+  /* Colour changes during a theme switch are painted over one frame rather
+     than snapping, which keeps a full-page palette flip from feeling abrupt.
+     Applied only for the ~240ms of the switch, so it never slows down hover
+     transitions.
+
+     Three properties only. This selector matches every element on the page, so
+     each one added is real per-frame work; `box-shadow` in particular is
+     expensive to interpolate and a shadow that snaps is barely noticeable next
+     to a background that does. Icons are drawn with `currentColor`, so `color`
+     already carries them.
+
+     Reduced motion is honoured in ThemeProvider, which skips adding the class
+     altogether — not by the media query at the bottom of this file. Important
+     declarations in a cascade layer beat unlayered ones, so this rule would
+     otherwise win over it. */
+  .theme-switching,
+  .theme-switching *,
+  .theme-switching *::before,
+  .theme-switching *::after {
+    transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease !important;
+    transition-delay: 0ms !important;
+  }
 }
 
-/* Scrollbar — quiet, dark, consistent across the site. */
+/* Scrollbar — quiet, themed, consistent across the site. */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--scrollbar-thumb);
   border-radius: 999px;
-  border: 2px solid #050505;
+  border: 2px solid var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* ---------------------------------------------------------------------------
@@ -131,12 +274,36 @@
   }
 }
 
+/* Print always uses the light palette — dark backgrounds waste ink and most
+   browsers drop them anyway, which would leave white text on white paper. */
 @media print {
+  :root {
+    color-scheme: light;
+    --canvas: 255 255 255;
+    --canvas-soft: 255 255 255;
+    --surface: 255 255 255;
+    --surface-raised: 255 255 255;
+    --surface-hover: 255 255 255;
+    --wash: 15 23 42;
+    --line: 15 23 42;
+    --line-alpha: 0.2;
+    --line-strong-alpha: 0.3;
+    --ink: 15 23 42;
+    --ink-muted: 51 65 85;
+    --ink-faint: 71 85 105;
+    --accent-blue: 29 78 216;
+    --accent-violet: 91 33 182;
+    --cta: 15 23 42;
+    --cta-fg: 255 255 255;
+    --grid-line: transparent;
+    --edge-light: transparent;
+    --shadow-card: none;
+    --shadow-glow: none;
+    --shadow-cta: none;
+    --shadow-cta-hover: none;
+  }
+
   .no-print {
     display: none !important;
-  }
-  body {
-    background: #fff;
-    color: #000;
   }
 }

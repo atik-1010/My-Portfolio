@@ -9,7 +9,7 @@ interface BadgeProps {
 }
 
 const variants = {
-  default: 'border-line bg-white/[0.04] text-ink-muted',
+  default: 'border-line bg-surface-muted text-ink-muted',
   accent: 'border-accent-blue/30 bg-accent-soft text-accent-blue',
   outline: 'border-line-strong bg-transparent text-ink-muted',
 } as const;

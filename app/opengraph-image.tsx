@@ -19,6 +19,10 @@ export default function OpenGraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
+          // Literal colours on purpose. This route is rendered to a static PNG
+          // by Satori at build time, which has no CSS variables and no theme to
+          // resolve — a share card is one fixed image for every viewer, so it
+          // stays on the dark brand palette. Do not swap these for var(--…).
           backgroundColor: '#050505',
           backgroundImage:
             'radial-gradient(120% 90% at 15% 0%, rgba(59,130,246,0.30) 0%, rgba(5,5,5,0) 55%), radial-gradient(100% 90% at 100% 100%, rgba(139,92,246,0.22) 0%, rgba(5,5,5,0) 55%)',

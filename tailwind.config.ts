@@ -1,5 +1,25 @@
 import type { Config } from 'tailwindcss';
 
+/**
+ * Every colour below resolves to a CSS variable declared in app/globals.css,
+ * where one set of values is defined for light and one for dark. Components
+ * therefore never name a theme: `bg-surface` is the right surface in both.
+ *
+ * Channel triplets (`15 23 42`) rather than hex, so Tailwind's opacity
+ * modifiers keep working — `bg-canvas/80` becomes `rgb(15 23 42 / 0.8)`.
+ */
+
+/** Opaque token. `text-ink` → full strength, `text-ink/60` → 60%. */
+const token = (name: string) => `rgb(var(${name}) / <alpha-value>)`;
+
+/**
+ * Translucent token: the variable carries its own base alpha, and an opacity
+ * modifier scales it. `border-line` is a hairline; `border-line/70` is 70% of
+ * one, not 70% of an opaque colour.
+ */
+const layer = (name: string, alpha: string) =>
+  `rgb(var(${name}) / calc(var(${alpha}) * <alpha-value>))`;
+
 const config: Config = {
   darkMode: 'class',
   content: [
@@ -11,32 +31,51 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        base: {
-          DEFAULT: '#050505',
-          soft: '#080808',
+        // Page background. Named `canvas`, not `base`, because `text-base` is
+        // already Tailwind's 1rem font-size utility — a colour called `base`
+        // emits a second, clashing `.text-base` rule.
+        canvas: {
+          DEFAULT: token('--canvas'),
+          soft: token('--canvas-soft'),
         },
         surface: {
-          DEFAULT: '#0D0D0D',
-          raised: '#121212',
-          hover: '#161616',
+          DEFAULT: token('--surface'),
+          raised: token('--surface-raised'),
+          hover: token('--surface-hover'),
+          // Faint washes for icon chips, inputs and inset panels.
+          subtle: layer('--wash', '--wash-subtle'),
+          muted: layer('--wash', '--wash-muted'),
+          strong: layer('--wash', '--wash-strong'),
         },
         line: {
-          DEFAULT: 'rgba(255,255,255,0.08)',
-          strong: 'rgba(255,255,255,0.14)',
+          DEFAULT: layer('--line', '--line-alpha'),
+          strong: layer('--line', '--line-strong-alpha'),
         },
         ink: {
-          DEFAULT: '#FFFFFF',
-          // Contrast against #050505: 8.9:1 — comfortably above WCAG AA.
-          muted: '#A1A1AA',
-          // Raised from #71717A, which measured 4.21:1 and failed AA for body
-          // text. #8B8B93 measures ~5.7:1 while keeping the same quiet feel.
-          faint: '#8B8B93',
+          DEFAULT: token('--ink'),
+          muted: token('--ink-muted'),
+          faint: token('--ink-faint'),
         },
         accent: {
-          DEFAULT: '#3B82F6',
-          blue: '#3B82F6',
-          violet: '#8B5CF6',
-          soft: 'rgba(59,130,246,0.12)',
+          DEFAULT: token('--accent-blue'),
+          blue: token('--accent-blue'),
+          violet: token('--accent-violet'),
+          soft: layer('--accent-blue', '--accent-soft-alpha'),
+        },
+        // The filled, highest-emphasis control: near-white on dark, near-black
+        // on light. `cta-fg` is the only text colour legible on top of it.
+        cta: {
+          DEFAULT: token('--cta'),
+          fg: token('--cta-fg'),
+        },
+        // Signal colours. Use these rather than a fixed palette shade like
+        // `emerald-400`, which is bright enough on a dark card and nearly
+        // invisible on a white one.
+        tone: {
+          success: token('--tone-success'),
+          warning: token('--tone-warning'),
+          info: token('--tone-info'),
+          special: token('--tone-special'),
         },
       },
       fontFamily: {
@@ -53,13 +92,19 @@ const config: Config = {
         prose: '46rem',
       },
       boxShadow: {
-        card: '0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 40px -24px rgba(0,0,0,0.9)',
-        glow: '0 0 80px -20px rgba(59,130,246,0.45)',
+        card: 'var(--shadow-card)',
+        glow: 'var(--shadow-glow)',
+        // Named `cta-lift`, not `cta`: a boxShadow key that collides with a
+        // colour name makes Tailwind emit `.shadow-cta` twice — once as the
+        // shadow, once as a shadow-colour utility — and the two then fight.
+        'cta-lift': 'var(--shadow-cta)',
+        'cta-lift-hover': 'var(--shadow-cta-hover)',
       },
       backgroundImage: {
-        'accent-gradient': 'linear-gradient(100deg, #3B82F6 0%, #8B5CF6 100%)',
+        'accent-gradient':
+          'linear-gradient(100deg, rgb(var(--accent-blue)) 0%, rgb(var(--accent-violet)) 100%)',
         'grid-faint':
-          'linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px)',
+          'linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)',
       },
       keyframes: {
         'fade-up': {

@@ -3,8 +3,10 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { profile } from '@/data/profile';
 import { site } from '@/lib/site';
+import { THEME_BOOTSTRAP_SCRIPT, THEME_COLOR } from '@/lib/theme';
 
 /**
  * Fonts are bundled with the repository (app/fonts) and served from your own
@@ -83,8 +85,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#050505',
-  colorScheme: 'dark',
+  // A single tag, deliberately: the theme bootstrap script and ThemeProvider
+  // rewrite its content to match the resolved theme. Declaring one variant per
+  // `prefers-color-scheme` instead would leave the browser chrome stuck on the
+  // OS preference whenever a visitor overrides it with the toggle.
+  themeColor: THEME_COLOR.dark,
+  colorScheme: 'light dark',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -138,11 +144,24 @@ function PersonJsonLd() {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
-      <body className="min-h-dvh bg-base font-sans text-ink">
+      <head>
+        {/*
+          Runs before the first paint and adds `light` or `dark` to <html>, so
+          the correct palette is in place for the very first frame. Without it a
+          dark-mode visitor sees a white flash on every page load.
+
+          The content is a build-time constant from lib/theme.ts — no user input
+          reaches it.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
+      </head>
+      <body className="min-h-dvh bg-canvas font-sans text-ink">
         <PersonJsonLd />
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Navbar />
+          <main id="main">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -12,10 +12,10 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-white text-black shadow-[0_10px_30px_-12px_rgba(255,255,255,0.45)] hover:bg-white/90 hover:shadow-[0_14px_36px_-12px_rgba(255,255,255,0.6)]',
+    'bg-cta text-cta-fg shadow-cta-lift hover:bg-cta/90 hover:shadow-cta-lift-hover',
   secondary:
-    'border border-line-strong bg-white/[0.03] text-ink hover:border-white/25 hover:bg-white/[0.07]',
-  ghost: 'text-ink-muted hover:bg-white/[0.05] hover:text-ink',
+    'border border-line-strong bg-surface-muted text-ink hover:border-line-strong hover:bg-surface-strong',
+  ghost: 'text-ink-muted hover:bg-surface-strong hover:text-ink',
 };
 
 const sizes: Record<Size, string> = {

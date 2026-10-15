@@ -18,7 +18,7 @@ export function Resume() {
         <Reveal>
           <div className="card edge-light relative overflow-hidden p-9 sm:p-12">
             <div
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_120%_at_50%_-20%,rgba(59,130,246,0.14),transparent_60%)]"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_120%_at_50%_-20%,rgb(var(--accent-blue)/0.14),transparent_60%)]"
               aria-hidden="true"
             />
             <div
@@ -27,7 +27,7 @@ export function Resume() {
             />
 
             <div className="relative mx-auto max-w-2xl text-center">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent-blue">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface-muted text-accent-blue">
                 <FileText className="h-5 w-5" aria-hidden="true" />
               </span>
 

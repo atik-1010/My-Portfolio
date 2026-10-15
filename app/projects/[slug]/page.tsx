@@ -74,7 +74,7 @@ export default async function ProjectPage({ params }: PageProps) {
       {/* ------------------------------------------------------------- header */}
       <header className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-          <div className="absolute left-1/2 top-[-20rem] h-[32rem] w-[min(64rem,140vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.14),transparent)] blur-2xl" />
+          <div className="absolute left-1/2 top-[-20rem] h-[32rem] w-[min(64rem,140vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(var(--accent-blue)/0.14),transparent)] blur-2xl" />
         </div>
 
         <div className="shell">
@@ -134,7 +134,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <Reveal key={key}>
               <section>
                 <h2 className="flex items-center gap-3 text-title font-semibold text-ink">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-white/[0.03] text-accent-blue">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface-muted text-accent-blue">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>
                   {title}
@@ -147,7 +147,7 @@ export default async function ProjectPage({ params }: PageProps) {
           <Reveal>
             <section>
               <h2 className="flex items-center gap-3 text-title font-semibold text-ink">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-white/[0.03] text-accent-violet">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface-muted text-accent-violet">
                   <Layers className="h-4 w-4" aria-hidden="true" />
                 </span>
                 Architecture
@@ -170,7 +170,7 @@ export default async function ProjectPage({ params }: PageProps) {
           <Reveal>
             <section>
               <h2 className="flex items-center gap-3 text-title font-semibold text-ink">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-white/[0.03] text-emerald-400">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface-muted text-tone-success">
                   <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
                 </span>
                 Key features
@@ -179,7 +179,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 {study.features.map((feature) => (
                   <li key={feature} className="card flex gap-3 p-5">
                     <CheckCircle2
-                      className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400/80"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-tone-success/80"
                       aria-hidden="true"
                     />
                     <span className="text-sm leading-relaxed text-ink-muted">{feature}</span>
@@ -192,7 +192,7 @@ export default async function ProjectPage({ params }: PageProps) {
           <Reveal>
             <section>
               <h2 className="flex items-center gap-3 text-title font-semibold text-ink">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-white/[0.03] text-amber-400">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface-muted text-tone-warning">
                   <AlertTriangle className="h-4 w-4" aria-hidden="true" />
                 </span>
                 Challenges
@@ -201,7 +201,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 {study.challenges.map((challenge) => (
                   <li key={challenge} className="flex gap-3 text-base leading-[1.75] text-ink-muted">
                     <span
-                      className="mt-[0.7rem] h-1 w-1 shrink-0 rounded-full bg-amber-400/70"
+                      className="mt-[0.7rem] h-1 w-1 shrink-0 rounded-full bg-tone-warning/70"
                       aria-hidden="true"
                     />
                     {challenge}
@@ -214,7 +214,7 @@ export default async function ProjectPage({ params }: PageProps) {
           <Reveal>
             <section className="card edge-light relative overflow-hidden p-8">
               <div
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_140%_at_0%_0%,rgba(139,92,246,0.12),transparent_60%)]"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_140%_at_0%_0%,rgb(var(--accent-violet)/0.12),transparent_60%)]"
                 aria-hidden="true"
               />
               <h2 className="relative text-title font-semibold text-ink">Outcome</h2>
@@ -245,7 +245,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   href={project.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-white/[0.02] px-4 py-3 transition-colors hover:border-line-strong"
+                  className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-surface-subtle px-4 py-3 transition-colors hover:border-line-strong"
                 >
                   <span className="flex items-center gap-2.5 text-sm text-ink">
                     <Github className="h-4 w-4 text-ink-muted" aria-hidden="true" />
@@ -259,7 +259,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   href={project.links.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-white/[0.02] px-4 py-3 transition-colors hover:border-line-strong"
+                  className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-surface-subtle px-4 py-3 transition-colors hover:border-line-strong"
                 >
                   <span className="flex items-center gap-2.5 text-sm text-ink">
                     <ExternalLink className="h-4 w-4 text-ink-muted" aria-hidden="true" />

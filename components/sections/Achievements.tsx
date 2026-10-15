@@ -59,7 +59,7 @@ export function Achievements() {
         {achievements.map((achievement) => {
           const inner = (
             <>
-              <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line bg-white/[0.03] text-accent-blue">
+              <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line bg-surface-muted text-accent-blue">
                 <Medal className="h-4 w-4" aria-hidden="true" />
               </span>
               <div className="min-w-0 flex-1">

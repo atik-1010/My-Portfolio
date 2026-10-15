@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, FileText } from 'lucide-react';
 import { navigation, profile } from '@/data/profile';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 /**
@@ -73,7 +74,7 @@ export function Navbar() {
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-cta focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-cta-fg"
       >
         Skip to content
       </a>
@@ -82,7 +83,7 @@ export function Navbar() {
         className={cn(
           'fixed inset-x-0 top-0 z-50 h-16 transition-all duration-300 no-print',
           scrolled
-            ? 'border-b border-line bg-base/80 backdrop-blur-xl supports-[backdrop-filter]:bg-base/60'
+            ? 'border-b border-line bg-canvas/80 backdrop-blur-xl supports-[backdrop-filter]:bg-canvas/60'
             : 'border-b border-transparent bg-transparent',
         )}
       >
@@ -124,9 +125,11 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
+            <ThemeToggle />
+
             <a
               href="#resume"
-              className="hidden h-9 items-center gap-2 rounded-full bg-white px-4 text-[13px] font-medium text-black transition-colors hover:bg-white/90 sm:inline-flex"
+              className="hidden h-9 items-center gap-2 rounded-full bg-cta px-4 text-[13px] font-medium text-cta-fg transition-colors hover:bg-cta/90 sm:inline-flex"
             >
               <FileText className="h-3.5 w-3.5" aria-hidden="true" />
               Resume
@@ -159,11 +162,11 @@ export function Navbar() {
           type="button"
           aria-label="Close menu"
           onClick={close}
-          className="absolute inset-0 h-full w-full bg-base/85 backdrop-blur-xl"
+          className="absolute inset-0 h-full w-full bg-canvas/85 backdrop-blur-xl"
         />
         <nav
           aria-label="Mobile"
-          className="relative mt-16 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-base px-5 pb-10 pt-6"
+          className="relative mt-16 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-canvas px-5 pb-10 pt-6"
         >
           <ul className="flex flex-col">
             {navigation.map((item, index) => (
@@ -184,7 +187,7 @@ export function Navbar() {
           <a
             href="#resume"
             onClick={close}
-            className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white text-sm font-medium text-black"
+            className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-cta text-sm font-medium text-cta-fg"
           >
             <FileText className="h-4 w-4" aria-hidden="true" />
             View Resume

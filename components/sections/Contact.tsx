@@ -51,7 +51,7 @@ export function Contact() {
   }
 
   const fieldClass =
-    'w-full rounded-xl border border-line bg-white/[0.02] px-4 py-3 text-sm text-ink placeholder:text-ink-faint ' +
+    'w-full rounded-xl border border-line bg-surface-subtle px-4 py-3 text-sm text-ink placeholder:text-ink-faint ' +
     'transition-colors duration-200 hover:border-line-strong focus:border-accent-blue/60 focus:outline-none ' +
     'focus:ring-2 focus:ring-accent-blue/25';
 
@@ -71,7 +71,7 @@ export function Contact() {
               Based in {profile.location}. Available for remote and on-site opportunities.
             </p>
 
-            <div className="mt-7 rounded-xl border border-line bg-white/[0.02] p-4">
+            <div className="mt-7 rounded-xl border border-line bg-surface-subtle p-4">
               <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-faint">
                 Email
               </p>
@@ -89,7 +89,7 @@ export function Contact() {
                   className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-ink"
                 >
                   {copied ? (
-                    <Check className="h-3.5 w-3.5 text-emerald-400" />
+                    <Check className="h-3.5 w-3.5 text-tone-success" />
                   ) : (
                     <Copy className="h-3.5 w-3.5" />
                   )}
@@ -108,7 +108,7 @@ export function Contact() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-white/[0.02] px-4 py-3 transition-colors duration-200 hover:border-line-strong hover:bg-white/[0.04]"
+                        className="group flex items-center justify-between gap-3 rounded-xl border border-line bg-surface-subtle px-4 py-3 transition-colors duration-200 hover:border-line-strong hover:bg-surface-muted"
                       >
                         <span className="flex min-w-0 items-center gap-3">
                           <Icon className="h-4 w-4 shrink-0 text-ink-muted" aria-hidden="true" />
@@ -187,7 +187,7 @@ export function Contact() {
 
               <button
                 type="submit"
-                className="group inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-medium text-black transition-all duration-300 hover:bg-white/90 active:scale-[0.99] sm:w-auto"
+                className="group inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-cta px-5 text-sm font-medium text-cta-fg transition-all duration-300 hover:bg-cta/90 active:scale-[0.99] sm:w-auto"
               >
                 {sent ? (
                   <>

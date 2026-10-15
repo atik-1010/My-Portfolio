@@ -23,7 +23,7 @@ export function Skills() {
             <StaggerItem key={group.id}>
               <article className="card card-hover h-full p-6">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-white/[0.03] text-accent-blue">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface-muted text-accent-blue">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>
                   <h3 className="text-[15px] font-semibold text-ink">{group.title}</h3>
@@ -33,7 +33,7 @@ export function Skills() {
                   {group.items.map((item) => (
                     <li
                       key={item}
-                      className="rounded-lg border border-line bg-white/[0.02] px-2.5 py-1.5 text-[13px] text-ink-muted transition-colors duration-200 hover:border-line-strong hover:text-ink"
+                      className="rounded-lg border border-line bg-surface-subtle px-2.5 py-1.5 text-[13px] text-ink-muted transition-colors duration-200 hover:border-line-strong hover:text-ink"
                     >
                       {item}
                     </li>
