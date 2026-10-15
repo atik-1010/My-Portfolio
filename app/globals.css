@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --nav-height: 4rem;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the fixed navbar. */
+    scroll-padding-top: calc(var(--nav-height) + 1.5rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-base text-ink antialiased;
+    font-feature-settings: 'ss01', 'cv01';
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Anything that scrolls should not drag the page sideways. */
+  body {
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-accent-blue/30 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-blue/70 ring-offset-2 ring-offset-base rounded-sm;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-balance;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface/70 shadow-card backdrop-blur-sm;
+  }
+
+  .card-hover {
+    @apply transition-[transform,border-color,background-color] duration-300 ease-out
+           hover:-translate-y-1 hover:border-line-strong hover:bg-surface-hover/80;
+  }
+
+  .accent-text {
+    @apply bg-accent-gradient bg-clip-text text-transparent;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-line-strong to-transparent;
+  }
+
+  /* Subtle top-lit edge used on hero and section headers. */
+  .edge-light::before {
+    content: '';
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px
+           bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+}
+
+/* Scrollbar — quiet, dark, consistent across the site. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  border: 2px solid #050505;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion: honour the OS setting everywhere, including the CSS-driven
+   animations. Framer Motion components check the same preference in JS.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
